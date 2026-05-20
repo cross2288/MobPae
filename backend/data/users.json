@@ -1,0 +1,37 @@
+{
+  "users": [
+    {
+      "id": "u-admin-001",
+      "email": "admin@mobpae.com",
+      "password": "admin123",
+      "name": "Admin",
+      "role": "admin",
+      "status": "active"
+    },
+    {
+      "id": "u-employer-001",
+      "email": "employer@acme.com",
+      "password": "employer123",
+      "name": "John Doe",
+      "role": "employer",
+      "company_name": "Acme Corp",
+      "phone_number": "9876543210",
+      "city": "Mumbai",
+      "industry": "Tech",
+      "status": "active"
+    },
+    {
+      "id": "u-employee-001",
+      "email": "employee@acme.com",
+      "password": "employee123",
+      "name": "Jane Smith",
+      "role": "employee",
+      "company_id": "u-employer-001",
+      "phone_number": "9876543211",
+      "monthly_salary": 50000,
+      "advance_limit_percentage": 30,
+      "department": "Engineering",
+      "status": "active"
+    }
+  ]
+}
