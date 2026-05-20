@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DashboardLayout } from '../../components/DashboardLayout';
 import axios from 'axios';
-import { Users, UserCheck, Clock, CheckCircle, XCircle, TrendingUp } from 'lucide-react';
+import { Users, UserCheck, Clock, CheckCircle, XCircle, TrendingUp, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/ui/button';
 
@@ -55,11 +55,14 @@ export const EmployerDashboard = () => {
   return (
     <DashboardLayout role="employer">
       <div data-testid="employer-dashboard">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-outfit font-medium tracking-tight text-slate-900">Employer Dashboard</h1>
-          <Link to="/employer/employees">
-            <Button className="rounded-full bg-primary hover:bg-primary/90" data-testid="add-employee-btn">
-              <Users className="h-5 w-5 mr-2" /> Manage Employees
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-outfit font-medium tracking-tight text-slate-900">Dashboard</h1>
+            <p className="text-sm text-slate-600 mt-1">Welcome back, manage your team here</p>
+          </div>
+          <Link to="/employer/employees" className="w-full sm:w-auto">
+            <Button className="w-full sm:w-auto rounded-full bg-primary hover:bg-primary/90" data-testid="manage-employees-btn">
+              <Plus className="h-5 w-5 mr-2" /> Add Employee
             </Button>
           </Link>
         </div>
@@ -70,7 +73,7 @@ export const EmployerDashboard = () => {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8">
               <StatCard
                 title="Total Employees"
                 value={stats.totalEmployees}
@@ -79,28 +82,28 @@ export const EmployerDashboard = () => {
                 testId="total-employees-card"
               />
               <StatCard
-                title="Active Employees"
+                title="Active"
                 value={stats.activeEmployees}
                 icon={UserCheck}
                 color="green"
                 testId="active-employees-card"
               />
               <StatCard
-                title="Pending Requests"
+                title="Pending"
                 value={stats.pendingRequests}
                 icon={Clock}
                 color="yellow"
                 testId="pending-requests-card"
               />
               <StatCard
-                title="Approved Requests"
+                title="Approved"
                 value={stats.approvedRequests}
                 icon={CheckCircle}
                 color="green"
                 testId="approved-requests-card"
               />
               <StatCard
-                title="Rejected Requests"
+                title="Rejected"
                 value={stats.rejectedRequests}
                 icon={XCircle}
                 color="red"
@@ -115,9 +118,9 @@ export const EmployerDashboard = () => {
               />
             </div>
 
-            <div className="rounded-2xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-6">
+            <div className="rounded-2xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-4 sm:p-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-outfit font-medium">Recent Advance Requests</h2>
+                <h2 className="text-lg sm:text-xl font-outfit font-medium">Recent Requests</h2>
                 <Link to="/employer/requests">
                   <Button variant="ghost" size="sm" className="text-primary" data-testid="view-all-requests-btn">
                     View All
@@ -127,36 +130,49 @@ export const EmployerDashboard = () => {
               {recentRequests.length === 0 ? (
                 <p className="text-slate-600 text-center py-8" data-testid="no-recent-requests">No requests yet</p>
               ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full" data-testid="recent-requests-table">
-                    <thead className="border-b border-slate-200">
-                      <tr>
-                        <th className="px-4 py-3 text-left text-sm font-medium text-slate-700">Employee</th>
-                        <th className="px-4 py-3 text-left text-sm font-medium text-slate-700">Amount</th>
-                        <th className="px-4 py-3 text-left text-sm font-medium text-slate-700">Reason</th>
-                        <th className="px-4 py-3 text-left text-sm font-medium text-slate-700">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {recentRequests.map((request, index) => (
-                        <tr key={index} className="border-b border-slate-100" data-testid={`request-row-${index}`}>
-                          <td className="px-4 py-3 text-sm text-slate-900">{request.employee_name}</td>
-                          <td className="px-4 py-3 text-sm text-slate-900 font-medium">₹{request.amount?.toLocaleString()}</td>
-                          <td className="px-4 py-3 text-sm text-slate-600">{request.reason || '-'}</td>
-                          <td className="px-4 py-3 text-sm">
-                            <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                              request.status === 'approved' ? 'bg-green-100 text-green-700' :
-                              request.status === 'rejected' ? 'bg-red-100 text-red-700' :
-                              'bg-yellow-100 text-yellow-700'
-                            }`}>
-                              {request.status}
-                            </span>
-                          </td>
+                <>
+                  {/* Desktop Table */}
+                  <div className="hidden md:block overflow-x-auto">
+                    <table className="w-full" data-testid="recent-requests-table">
+                      <thead className="border-b border-slate-200">
+                        <tr>
+                          <th className="px-4 py-3 text-left text-sm font-medium text-slate-700">Employee</th>
+                          <th className="px-4 py-3 text-left text-sm font-medium text-slate-700">Amount</th>
+                          <th className="px-4 py-3 text-left text-sm font-medium text-slate-700">Reason</th>
+                          <th className="px-4 py-3 text-left text-sm font-medium text-slate-700">Status</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                      </thead>
+                      <tbody>
+                        {recentRequests.map((request, index) => (
+                          <tr key={index} className="border-b border-slate-100" data-testid={`request-row-${index}`}>
+                            <td className="px-4 py-3 text-sm text-slate-900">{request.employee_name}</td>
+                            <td className="px-4 py-3 text-sm text-slate-900 font-medium">₹{request.amount?.toLocaleString()}</td>
+                            <td className="px-4 py-3 text-sm text-slate-600">{request.reason || '-'}</td>
+                            <td className="px-4 py-3 text-sm">
+                              <StatusBadge status={request.status} />
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Mobile Cards */}
+                  <div className="md:hidden space-y-3" data-testid="recent-requests-cards">
+                    {recentRequests.map((request, index) => (
+                      <div key={index} className="border border-slate-100 rounded-xl p-4" data-testid={`request-card-${index}`}>
+                        <div className="flex items-start justify-between mb-2">
+                          <div>
+                            <p className="font-medium text-slate-900">{request.employee_name}</p>
+                            <p className="text-xs text-slate-500 mt-0.5">{request.reason || 'No reason provided'}</p>
+                          </div>
+                          <StatusBadge status={request.status} />
+                        </div>
+                        <p className="text-lg font-outfit font-semibold text-slate-900 mt-2">₹{request.amount?.toLocaleString()}</p>
+                      </div>
+                    ))}
+                  </div>
+                </>
               )}
             </div>
           </>
@@ -165,6 +181,16 @@ export const EmployerDashboard = () => {
     </DashboardLayout>
   );
 };
+
+const StatusBadge = ({ status }) => (
+  <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+    status === 'approved' ? 'bg-green-100 text-green-700' :
+    status === 'rejected' ? 'bg-red-100 text-red-700' :
+    'bg-yellow-100 text-yellow-700'
+  }`}>
+    {status}
+  </span>
+);
 
 const StatCard = ({ title, value, icon: Icon, color, testId }) => {
   const colorClasses = {
@@ -176,14 +202,14 @@ const StatCard = ({ title, value, icon: Icon, color, testId }) => {
   };
 
   return (
-    <div className="rounded-2xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-6" data-testid={testId}>
-      <div className="flex items-center justify-between mb-4">
-        <div className={`w-12 h-12 rounded-xl ${colorClasses[color]} flex items-center justify-center`}>
-          <Icon className="h-6 w-6" />
+    <div className="rounded-2xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-4 sm:p-6" data-testid={testId}>
+      <div className="flex items-center justify-between mb-3">
+        <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${colorClasses[color]} flex items-center justify-center`}>
+          <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
         </div>
       </div>
-      <p className="text-sm text-slate-600 mb-1">{title}</p>
-      <p className="text-2xl font-outfit font-semibold text-slate-900">{value}</p>
+      <p className="text-xs sm:text-sm text-slate-600 mb-1">{title}</p>
+      <p className="text-lg sm:text-2xl font-outfit font-semibold text-slate-900 break-words">{value}</p>
     </div>
   );
 };
