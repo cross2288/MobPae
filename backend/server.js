@@ -452,29 +452,6 @@ async function startup() {
     }
   }
 
-  const fs = require('fs');
-  const path = require('path');
-  const memDir = '/app/memory';
-  if (!fs.existsSync(memDir)) fs.mkdirSync(memDir, { recursive: true });
-  fs.writeFileSync(path.join(memDir, 'test_credentials.md'),
-`# Test Credentials for Mob Pae
-
-## Admin Account
-- Email: ${ADMIN_EMAIL}
-- Password: ${ADMIN_PASSWORD}
-- Role: admin
-
-## Test Employee Account (created by employer)
-- Default Password: employee123
-- Role: employee
-
-## Auth Endpoints
-- POST /api/auth/register
-- POST /api/auth/login
-- POST /api/auth/logout
-- GET /api/auth/me
-`);
-
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`Mob Pae Node.js backend running on port ${PORT}`);
   });
