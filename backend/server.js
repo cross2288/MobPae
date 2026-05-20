@@ -392,6 +392,66 @@ async function startup() {
     console.log('Admin password updated');
   }
 
+  // Seed default employer
+  const DEFAULT_EMPLOYER_EMAIL = 'employer@acme.com';
+  const DEFAULT_EMPLOYER_PASSWORD = 'employer123';
+  let employerId;
+  const existingEmployer = await db.collection('users').findOne({ email: DEFAULT_EMPLOYER_EMAIL });
+  if (!existingEmployer) {
+    const result = await db.collection('users').insertOne({
+      email: DEFAULT_EMPLOYER_EMAIL,
+      password_hash: await hashPassword(DEFAULT_EMPLOYER_PASSWORD),
+      name: 'John Doe', role: 'employer',
+      company_name: 'Acme Corp', phone_number: '9876543210',
+      city: 'Mumbai', industry: 'Tech',
+      created_at: new Date(), status: 'active'
+    });
+    employerId = result.insertedId.toString();
+    console.log('Default employer created');
+  } else {
+    employerId = existingEmployer._id.toString();
+    if (!(await verifyPassword(DEFAULT_EMPLOYER_PASSWORD, existingEmployer.password_hash))) {
+      await db.collection('users').updateOne(
+        { email: DEFAULT_EMPLOYER_EMAIL },
+        { $set: { password_hash: await hashPassword(DEFAULT_EMPLOYER_PASSWORD) } }
+      );
+      console.log('Employer password updated');
+    }
+  }
+
+  // Seed default employee linked to the default employer
+  const DEFAULT_EMPLOYEE_EMAIL = 'employee@acme.com';
+  const DEFAULT_EMPLOYEE_PASSWORD = 'employee123';
+  const existingEmployee = await db.collection('users').findOne({ email: DEFAULT_EMPLOYEE_EMAIL });
+  if (!existingEmployee) {
+    await db.collection('users').insertOne({
+      email: DEFAULT_EMPLOYEE_EMAIL,
+      password_hash: await hashPassword(DEFAULT_EMPLOYEE_PASSWORD),
+      name: 'Jane Smith', role: 'employee',
+      company_id: employerId,
+      phone_number: '9876543211',
+      monthly_salary: 50000,
+      advance_limit_percentage: 30,
+      department: 'Engineering',
+      created_at: new Date(), status: 'active'
+    });
+    console.log('Default employee created');
+  } else {
+    if (!(await verifyPassword(DEFAULT_EMPLOYEE_PASSWORD, existingEmployee.password_hash))) {
+      await db.collection('users').updateOne(
+        { email: DEFAULT_EMPLOYEE_EMAIL },
+        { $set: { password_hash: await hashPassword(DEFAULT_EMPLOYEE_PASSWORD), company_id: employerId } }
+      );
+      console.log('Employee password updated');
+    } else if (!existingEmployee.company_id || existingEmployee.company_id !== employerId) {
+      await db.collection('users').updateOne(
+        { email: DEFAULT_EMPLOYEE_EMAIL },
+        { $set: { company_id: employerId } }
+      );
+      console.log('Employee company_id linked');
+    }
+  }
+
   const fs = require('fs');
   const path = require('path');
   const memDir = '/app/memory';
