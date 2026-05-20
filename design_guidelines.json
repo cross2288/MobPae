@@ -1,0 +1,101 @@
+{
+  "theme": "light",
+  "archetype": "Archetype 4 (Swiss & High-Contrast) adapted for Premium Fintech",
+  "typography": {
+    "strategy": "The 'Old Money Tech' hybrid. Premium, authoritative, and clean.",
+    "fonts": {
+      "heading": "Outfit",
+      "body": "IBM Plex Sans",
+      "mono": "JetBrains Mono"
+    },
+    "hierarchy": {
+      "h1": "text-5xl sm:text-6xl tracking-tight font-medium",
+      "h2": "text-3xl sm:text-4xl tracking-tight font-medium",
+      "h3": "text-xl sm:text-2xl font-medium",
+      "h4": "text-lg sm:text-xl font-medium",
+      "body": "text-base leading-relaxed",
+      "label": "text-sm uppercase tracking-[0.2em] font-medium text-slate-500"
+    }
+  },
+  "colors": {
+    "primary": {
+      "DEFAULT": "#1D4ED8",
+      "hover": "#2563EB",
+      "foreground": "#FFFFFF"
+    },
+    "background": {
+      "main": "#F8FAFC",
+      "card": "#FFFFFF",
+      "hero": "#0A1128"
+    },
+    "text": {
+      "primary": "#0F172A",
+      "secondary": "#64748B",
+      "hero_primary": "#FFFFFF",
+      "hero_secondary": "#94A3B8"
+    },
+    "status": {
+      "success": "#10B981",
+      "warning": "#F59E0B",
+      "danger": "#EF4444"
+    },
+    "border": "#E2E8F0"
+  },
+  "layout_and_spacing": {
+    "spacing_scale": "Generous spacing. Use p-8 or p-12 for containers.",
+    "dashboard_layout": "Sidebar navigation with rounded cards and soft shadows. Content area uses p-6 or p-8.",
+    "card_style": "rounded-2xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100",
+    "grid_strategy": "Control Room Grid (Dense) for dashboards. Bento Grid for Landing Page features."
+  },
+  "components": {
+    "navigation": "Sticky sidebar for dashboards (w-64). Glassmorphism sticky header (backdrop-blur-xl bg-white/70) for the public landing page.",
+    "buttons": "rounded-full or rounded-xl. Primary buttons use bg-blue-700 hover:bg-blue-600. Include hover:-translate-y-0.5 transition-all.",
+    "forms": "Shadcn components, fully rounded inputs (rounded-xl), focus:ring-2 focus:ring-blue-500. Use IBM Plex Sans for input text.",
+    "tables": "Shadcn table, crisp borders, generous cell padding (p-4).",
+    "cards": "Subtle roundness (rounded-2xl) and soft ambient shadow."
+  },
+  "interactions_and_motion": {
+    "hover_states": "All interactive elements must explicitly define hover text and background.",
+    "transitions": "transition-all duration-300 ease-out",
+    "micro_interactions": "Cards lift slightly on hover (-translate-y-1)."
+  },
+  "media": {
+    "image_urls": [
+      {
+        "category": "hero_background",
+        "url": "https://static.prod-images.emergentagent.com/jobs/7c8cee12-4131-4033-8d27-b496ae48e677/images/8ee0b9798720e266ea39481c07dd54f2c90752d02b0ff8c57570421ef390504b.png",
+        "description": "Abstract deep dark navy blue glowing mesh gradient for landing page hero."
+      },
+      {
+        "category": "app_mockup",
+        "url": "https://static.prod-images.emergentagent.com/jobs/7c8cee12-4131-4033-8d27-b496ae48e677/images/7eaed74ba87153c0ce6d5550b70b97f2d1b6c3eb3ac086586aa0acae2f47a769.png",
+        "description": "Premium 3D mobile app mockup for the features section."
+      },
+      {
+        "category": "testimonial_profile_1",
+        "url": "https://images.unsplash.com/photo-1778692258270-bc0e80e975c0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwyfHxidXNpbmVzcyUyMHByb2Zlc3Npb25hbCUyMHBvcnRyYWl0JTIwc21pbGluZ3xlbnwwfHx8fDE3NzkyNTQ5NTd8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Business professional smiling for employer testimonial."
+      },
+      {
+        "category": "testimonial_profile_2",
+        "url": "https://images.unsplash.com/photo-1762522921456-cdfe882d36c3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwzfHxidXNpbmVzcyUyMHByb2Zlc3Npb25hbCUyMHBvcnRyYWl0JTIwc21pbGluZ3xlbnwwfHx8fDE3NzkyNTQ5NTd8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Female business professional for employee testimonial."
+      },
+      {
+        "category": "partner_logo",
+        "url": "https://images.unsplash.com/photo-1777643825708-21fad6164f52?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTF8MHwxfHNlYXJjaHwzfHxjb21wYW55JTIwc3BvbnNvciUyMGxvZ28lMjB3aGl0ZSUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzc5MjU0OTU3fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Abstract corporate partner logo."
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Strictly apply data-testid to ALL interactive elements.",
+    "Landing page hero section must use the dark navy background (#0A1128) with white text, and 'hero_background' image overlapping with mix-blend-mode or low opacity overlay (bg-black/30).",
+    "Dashboard must be built with a permanent left sidebar.",
+    "Do not use Inter for headings. Use Outfit font.",
+    "Ensure all dashboard tables use Shadcn components and data points have high contrast.",
+    "Implement the three role-based dashboards (Admin, Employer, Employee) within separate route modules but sharing the same sidebar navigation shell style.",
+    "Use Phosphor icons or lucide-react for standard SaaS app icons.",
+    "Ensure the application layout strictly follows the requested 'premium fintech design with clean SaaS style: white/light dashboard, dark navy landing hero, blue primary color, rounded cards, soft shadows'."
+  ]
+}
