@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="14" skipped="0" tests="24" time="2.945" timestamp="2026-05-20T05:39:43.906553+00:00" hostname="agent-env-70464c80-7d17-43ec-9aa9-f897f51f1d95"><testcase classname="backend.tests.backend_test" name="test_01_health_root" time="0.280" /><testcase classname="backend.tests.backend_test" name="test_02_admin_login" time="0.379" /><testcase classname="backend.tests.backend_test" name="test_03_admin_invalid_login" time="0.340" /><testcase classname="backend.tests.backend_test" name="test_04_admin_me" time="0.043" /><testcase classname="backend.tests.backend_test" name="test_05_submit_enquiry" time="0.297" /><testcase classname="backend.tests.backend_test" name="test_06_admin_get_enquiries" time="0.050" /><testcase classname="backend.tests.backend_test" name="test_07_admin_approve_employer" time="0.365" /><testcase classname="backend.tests.backend_test" name="test_08_admin_get_users" time="0.044"><failure message="assert False&#10; +  where False = any(&lt;generator object test_08_admin_get_users.&lt;locals&gt;.&lt;genexpr&gt; at 0xfec179d32f80&gt;)">backend/tests/backend_test.py:110: in test_08_admin_get_users
+    assert any(u.get("email") == EMPLOYER_EMAIL for u in r.json())
+E   assert False
+E    +  where False = any(&lt;generator object test_08_admin_get_users.&lt;locals&gt;.&lt;genexpr&gt; at 0xfec179d32f80&gt;)</failure></testcase><testcase classname="backend.tests.backend_test" name="test_09_employer_login" time="0.332" /><testcase classname="backend.tests.backend_test" name="test_10_employer_add_employee" time="0.268"><failure message="AssertionError: Add employee failed (likely current_user['id'] KeyError): 500 Internal Server Error&#10;assert 500 == 200&#10; +  where 500 = &lt;Response [500]&gt;.status_code">backend/tests/backend_test.py:136: in test_10_employer_add_employee
+    assert r.status_code == 200, f"Add employee failed (likely current_user['id'] KeyError): {r.status_code} {r.text}"
+E   AssertionError: Add employee failed (likely current_user['id'] KeyError): 500 Internal Server Error
+E   assert 500 == 200
+E    +  where 500 = &lt;Response [500]&gt;.status_code</failure></testcase><testcase classname="backend.tests.backend_test" name="test_11_employer_list_employees" time="0.045"><failure message="AssertionError: Internal Server Error&#10;assert 500 == 200&#10; +  where 500 = &lt;Response [500]&gt;.status_code">backend/tests/backend_test.py:143: in test_11_employer_list_employees
+    assert r.status_code == 200, r.text
+E   AssertionError: Internal Server Error
+E   assert 500 == 200
+E    +  where 500 = &lt;Response [500]&gt;.status_code</failure></testcase><testcase classname="backend.tests.backend_test" name="test_12_employee_login" time="0.152"><failure message="AssertionError: {&quot;detail&quot;:&quot;Invalid email or password&quot;}&#10;assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/backend_test.py:152: in test_12_employee_login
+    assert r.status_code == 200, r.text
+E   AssertionError: {"detail":"Invalid email or password"}
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="backend.tests.backend_test" name="test_13_employee_dashboard_stats" time="0.000"><failure message="KeyError: 'employee_session'">backend/tests/backend_test.py:157: in test_13_employee_dashboard_stats
+    s = state["employee_session"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'employee_session'</failure></testcase><testcase classname="backend.tests.backend_test" name="test_14_employee_request_advance" time="0.000"><failure message="KeyError: 'employee_session'">backend/tests/backend_test.py:166: in test_14_employee_request_advance
+    s = state["employee_session"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'employee_session'</failure></testcase><testcase classname="backend.tests.backend_test" name="test_15_employee_request_advance_duplicate_pending" time="0.000"><failure message="KeyError: 'employee_session'">backend/tests/backend_test.py:174: in test_15_employee_request_advance_duplicate_pending
+    s = state["employee_session"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'employee_session'</failure></testcase><testcase classname="backend.tests.backend_test" name="test_16_employee_request_advance_over_limit" time="0.000"><failure message="KeyError: 'employee_session'">backend/tests/backend_test.py:183: in test_16_employee_request_advance_over_limit
+    s = state["employee_session"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'employee_session'</failure></testcase><testcase classname="backend.tests.backend_test" name="test_17_employee_my_requests" time="0.000"><failure message="KeyError: 'employee_session'">backend/tests/backend_test.py:189: in test_17_employee_my_requests
+    s = state["employee_session"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'employee_session'</failure></testcase><testcase classname="backend.tests.backend_test" name="test_18_employer_view_advance_requests" time="0.046"><failure message="AssertionError: Internal Server Error&#10;assert 500 == 200&#10; +  where 500 = &lt;Response [500]&gt;.status_code">backend/tests/backend_test.py:200: in test_18_employer_view_advance_requests
+    assert r.status_code == 200, r.text
+E   AssertionError: Internal Server Error
+E   assert 500 == 200
+E    +  where 500 = &lt;Response [500]&gt;.status_code</failure></testcase><testcase classname="backend.tests.backend_test" name="test_19_employer_approve_request" time="0.000"><failure message="KeyError: 'request_id'">backend/tests/backend_test.py:207: in test_19_employer_approve_request
+    r = s.post(f"{API}/employer/handle-request", json={"request_id": state["request_id"], "action": "approve"})
+                                                                     ^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'request_id'</failure></testcase><testcase classname="backend.tests.backend_test" name="test_20_employee_stats_after_approval" time="0.000"><failure message="KeyError: 'employee_session'">backend/tests/backend_test.py:212: in test_20_employee_stats_after_approval
+    s = state["employee_session"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'employee_session'</failure></testcase><testcase classname="backend.tests.backend_test" name="test_21_rbac_employee_cannot_admin" time="0.000"><failure message="KeyError: 'employee_session'">backend/tests/backend_test.py:222: in test_21_rbac_employee_cannot_admin
+    s = state["employee_session"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'employee_session'</failure></testcase><testcase classname="backend.tests.backend_test" name="test_22_rbac_employer_cannot_employee_endpoints" time="0.043" /><testcase classname="backend.tests.backend_test" name="test_23_unauthenticated_blocked" time="0.106" /><testcase classname="backend.tests.backend_test" name="test_24_logout" time="0.000"><failure message="KeyError: 'employee_session'">backend/tests/backend_test.py:240: in test_24_logout
+    s = state["employee_session"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'employee_session'</failure></testcase></testsuite></testsuites>
