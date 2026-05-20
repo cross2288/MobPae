@@ -12,12 +12,24 @@ export const LandingPage = () => {
       <nav className="sticky top-0 z-50 backdrop-blur-xl bg-white/70 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="text-2xl font-outfit font-semibold text-slate-900" data-testid="logo">Mob Pae</div>
-          <div className="flex items-center gap-4">
-            <Link to="/login">
-              <Button variant="ghost" className="text-slate-700 hover:text-primary" data-testid="employer-login-nav">Employer Login</Button>
+          <div className="hidden md:flex items-center gap-2">
+            <Link to="/admin">
+              <Button variant="ghost" className="text-slate-700 hover:text-primary" data-testid="demo-admin-nav">Admin</Button>
+            </Link>
+            <Link to="/employer">
+              <Button variant="ghost" className="text-slate-700 hover:text-primary" data-testid="demo-employer-nav">Employer</Button>
+            </Link>
+            <Link to="/employee">
+              <Button variant="ghost" className="text-slate-700 hover:text-primary" data-testid="demo-employee-nav">Employee</Button>
             </Link>
             <Link to="/login">
-              <Button className="rounded-full bg-primary hover:bg-primary/90 transition-all hover:-translate-y-0.5" data-testid="employee-login-nav">Employee Login</Button>
+              <Button className="rounded-full bg-primary hover:bg-primary/90 transition-all hover:-translate-y-0.5" data-testid="login-nav">Login</Button>
+            </Link>
+          </div>
+          {/* Mobile menu */}
+          <div className="md:hidden">
+            <Link to="/login">
+              <Button size="sm" className="rounded-full bg-primary hover:bg-primary/90" data-testid="login-nav-mobile">Login</Button>
             </Link>
           </div>
         </div>
@@ -64,6 +76,28 @@ export const LandingPage = () => {
                 Get Started
               </Button>
             </Link>
+          </div>
+
+          {/* Demo Dashboards Quick Access */}
+          <div className="mt-12 pt-8 border-t border-white/10">
+            <p className="text-sm text-slate-400 uppercase tracking-[0.2em] mb-4">Preview Dashboards</p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Link to="/admin">
+                <Button variant="outline" className="rounded-full border-white/30 bg-white/5 text-white hover:bg-white hover:text-slate-900 transition-all" data-testid="demo-admin-btn">
+                  Admin Dashboard
+                </Button>
+              </Link>
+              <Link to="/employer">
+                <Button variant="outline" className="rounded-full border-white/30 bg-white/5 text-white hover:bg-white hover:text-slate-900 transition-all" data-testid="demo-employer-btn">
+                  Employer Dashboard
+                </Button>
+              </Link>
+              <Link to="/employee">
+                <Button variant="outline" className="rounded-full border-white/30 bg-white/5 text-white hover:bg-white hover:text-slate-900 transition-all" data-testid="demo-employee-btn">
+                  Employee Dashboard
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

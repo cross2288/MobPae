@@ -17,27 +17,8 @@ import { RequestAdvance } from './pages/employee/RequestAdvance';
 import { MyRequests } from './pages/employee/MyRequests';
 import './App.css';
 
-const RoleBasedRedirect = () => {
-  const { user, loading } = useAuth();
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
-  if (!user || user === false) {
-    return <LandingPage />;
-  }
-
-  if (user.role === 'admin') return <Navigate to="/admin" replace />;
-  if (user.role === 'employer') return <Navigate to="/employer" replace />;
-  if (user.role === 'employee') return <Navigate to="/employee" replace />;
-  
-  return <LandingPage />;
-};
+// DEMO MODE: Always show landing page at root
+const RoleBasedRedirect = () => <LandingPage />;
 
 function App() {
   return (
