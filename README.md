@@ -1,4 +1,4 @@
-Let me give you a complete walkthrough of the project.
+A complete walkthrough of the project.
 
 📁 Project Structure
 /app/
